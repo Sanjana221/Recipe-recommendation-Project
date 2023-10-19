@@ -3,9 +3,6 @@ import pandas as pd
 import pickle
 from sklearn.metrics.pairwise import cosine_similarity
 from Recommendation import get_recommendations
-import streamlit as st
-import streamlit.components.v1 as components
-from PIL import Image
 from Tfidf_emd import TfidfEmbeddingVectorizer
 from mean_embedding import MeanEmbeddingVectorizer
 
@@ -70,20 +67,3 @@ def get_recs(ingredients,N=5,mean=False):
     # Filter top N recommendations
     recommendations = get_recommendations(N, scores)
     return recommendations
-
-"""
-image = Image.open('/home/anya/major_project/images/recipe.jpg')
-st.image(image)
-
-components.html(
-    <h1 style="font-family:Times New Roman, Times, serif;font-size:40px;text-align:center">The Tasty delights</h1>
-    <h2 style="font-family:Times New Roman, Times, serif;text-align:center">An AI powered app!</h2>
-    
-)
-
-input = st.text_input('Enter recipe')
-rec = get_recs(input)
-st.write(rec)
-st.button("Give recommendation")\
-
-"""

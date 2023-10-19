@@ -15,16 +15,17 @@ def get_recommendations(N, scores):
     Top-N recomendations order by score
     """
     # load in recipe dataset
-    df_recipes = pd.read_csv("/home/anya/major_project/dataset/new_dataset.csv")
+    df_recipes = pd.read_csv("/home/anya/major_project/dataset/updated_data1.csv")
     # order the scores with and filter to get the highest N scores
     top = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:N]
     # create dataframe to load in recommendations
-    recommendation = pd.DataFrame(columns=["TranslatedRecipeName", "TranslatedIngredients", "URL", "score"])
+    recommendation = pd.DataFrame(columns=["RecipeName", "Ingredients", "URL", "score"])
     count = 0
     for i in top:
-        recommendation.at[count, "TranslatedRecipeName"] = title_parser(df_recipes["TranslatedRecipeName"][i])
-        recommendation.at[count, "TranslatedIngredients"] = df_recipes["TranslatedIngredients"][i]
+        recommendation.at[count, "RecipeName"] = title_parser(df_recipes["RecipeName"][i])
+        recommendation.at[count, "Ingredients"] = df_recipes["Ingredients"][i]
         recommendation.at[count, "URL"] = df_recipes["URL"][i]
+        recommendation.at[count, "image-url"] = df_recipes["image-url"][i]
         recommendation.at[count, "score"] = f"{scores[i]}"
         count += 1
     return recommendation
